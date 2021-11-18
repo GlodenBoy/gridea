@@ -75,6 +75,15 @@ $ cd gridea
 $ yarn
 $ yarn electron:serve
 $ yarn electron:build
+
+将 node_modules/isomorphic-git/dist/for-node/isomorphic-git/index.js 这里面用到 \x00 的地方使用了字符串模版的都换位，普通字符串链接即可。例如：
+将
+
+Buffer.from(`${type} ${object.byteLength.toString()}\x00`),
+换为
+
+Buffer.from(`${type} ${object.byteLength.toString()}` + '\x00'),
+好像大概有 5 处
 ```
 
 ## 联系
